@@ -26,7 +26,7 @@ class Movie
   end
 
   def update()
-    sql = "UPDATE movies SET (title, genre, rating, budger) = ($1, $2, $3, $4)
+    sql = "UPDATE movies SET (title, genre, rating, budget) = ($1, $2, $3, $4)
            WHERE id = $5"
     values = [@title, @genre, @rating, @budget, @id]
     SqlRunner.run(sql, values)
@@ -39,6 +39,21 @@ class Movie
     values = [@id]
     result = SqlRunner.run(sql, values)
     return result.map{|movie| MovieStar.new(movie)}
+  end
+
+  def budget_remaining
+    sql = "SELECT castings.fee FROM castings INNER JOIN moviestars
+           ON castings.moviestar_id = moviestars.id
+           WHERE castings.movie_id = $1"
+    values = [@id]
+    result = SqlRunner.run(sql, values)
+    fees_array = result.map{|casting| casting['fee'].to_i }
+    if fees_array.length > 0
+      deduction = fees_array.sum
+      return @budget - deduction
+    else
+      return @budget
+    end
   end
 
   def self.find_by_id(id)
@@ -59,6 +74,7 @@ class Movie
     SqlRunner.run(sql)
   end
 
-  # SELECT castings.fee FROM castings INNER JOIN moviestars ON castings.moviestar_id = moviestars.id WHERE castings.movie_id = 2
+
+  #
 
 end

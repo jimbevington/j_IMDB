@@ -40,6 +40,13 @@ class MovieStar
     return result.map{|movie| Movie.new(movie)}
   end
 
+  def self.find_by_id(id)
+    sql = "SELECT * FROM moviestars WHERE id = $1"
+    values = [id]
+    result = SqlRunner.run(sql, values)
+    return MovieStar.new(result[0])
+  end
+
   def self.all
     sql = "SELECT * FROM moviestars"
     stars = SqlRunner.run(sql)

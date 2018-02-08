@@ -13,31 +13,31 @@ movie1 = Movie.new({
     'title' => 'Drive',
     'genre' => 'thriller',
     'rating' => 4,
-    'budget' => 5000000
+    'budget' => 50000000
 })
 movie2 = Movie.new({
     'title' => 'Blade Runner 2049',
     'genre' => 'sci-fi',
     'rating' => 4,
-    'budget' => 1200000
+    'budget' => 12000000
 })
 movie3 = Movie.new({
     'title' => 'Get Out!',
     'genre' => 'horror',
     'rating' => 5,
-    'budget' => 100000
+    'budget' => 1000000
 })
 movie4 = Movie.new({
   'title' => 'Blade Runner',
   'genre' => 'sci-fi',
   'rating' => 5,
-  'budget' => 3450000
+  'budget' => 34500000
 })
 movie5 = Movie.new({
   'title' => 'Witness',
   'genre' => 'thriller',
   'rating' => 3,
-  'budget' => 2340000
+  'budget' => 23400000
 })
 
 movies = [movie1, movie2, movie3, movie4, movie5]
@@ -105,11 +105,11 @@ casting6 = Casting.new({
 
 castings = [casting1, casting2, casting3, casting4, casting5, casting6]
 
-for casting in castings
-  casting.save()
-end
+# for casting in castings
+#   casting.save()
+# end
 
-
+# budget = movie2.calculate_budget()
 
 binding.pry
 nil

@@ -12,6 +12,14 @@ class Casting
     @fee = options['fee']
   end
 
+  # def update_movie_budgets
+  #   # calc deduction
+  #   sql = "SELECT castings.fee FROM castings INNER JOIN moviestars
+  #          ON castings.moviestar_id = moviestars.id
+  #          WHERE castings.movie_id = $1"
+  #   values = [@movie_id]
+  # end
+
   def save()
     sql = "INSERT INTO castings (movie_id, moviestar_id, fee)
            VALUES ($1, $2, $3) RETURNING id"
