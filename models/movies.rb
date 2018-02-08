@@ -3,7 +3,7 @@ require_relative('../db/sql_runner.rb')
 class Movie
 
   attr_reader :id
-  attr_accessor :title, :genre, :rating
+  attr_accessor :title, :genre, :rating, :budget, :budget_available
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
@@ -11,6 +11,13 @@ class Movie
     @genre = options['genre']
     @rating = options['rating']
     @budget = options['budget']
+    # if created with a budget availabe field, use that, otherwise just
+    # initialize with the budget.
+    @budget_available = if options['budget_available']
+                          options['budget_available']
+                        else
+                          @budget
+                        end
   end
 
   def save()
