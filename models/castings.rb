@@ -14,6 +14,11 @@ class Casting
     @fee = options['fee']
   end
 
+  ###   UPDATE BUDGET_AVAILABLE FUNCTIONS ###
+  ###   currently called when CASTINGS are SAVED
+  ###   might be mixing too much functionality here,
+  ###   remove it by deleting - update_film_budget_available() from save()
+
   def calc_budget_deduction
     # calc deduction
     sql = "SELECT castings.fee FROM castings INNER JOIN moviestars
