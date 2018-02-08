@@ -13,16 +13,16 @@ class Movie
     @budget = options['budget']
     # if created with a budget availabe field, use that, otherwise just
     # initialize with the budget.
-    @budget_available = if options['budget_available']
-                          options['budget_available']
-                        else
+    @budget_available = unless options['budget_available']
                           @budget
+                        else
+                          options['budget_available']
                         end
   end
 
   def save()
-    sql = "INSERT INTO movies (title, genre, rating, budget) VALUES ($1, $2, $3, $4) RETURNING id"
-    values = [@title, @genre, @rating, @budget]
+    sql = "INSERT INTO movies (title, genre, rating, budget, budget_available) VALUES ($1, $2, $3, $4, $5) RETURNING id"
+    values = [@title, @genre, @rating, @budget, @budget_available]
     @id = SqlRunner.run(sql, values)[0]['id'].to_i
   end
 
@@ -33,9 +33,9 @@ class Movie
   end
 
   def update()
-    sql = "UPDATE movies SET (title, genre, rating, budget) = ($1, $2, $3, $4)
-           WHERE id = $5"
-    values = [@title, @genre, @rating, @budget, @id]
+    sql = "UPDATE movies SET (title, genre, rating, budget, budget_available) = ($1, $2, $3, $4, $5)
+           WHERE id = $6"
+    values = [@title, @genre, @rating, @budget, @budget_available, @id]
     SqlRunner.run(sql, values)
   end
 
